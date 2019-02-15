@@ -3,6 +3,10 @@ from algorithms import MCTS
 import numpy as np
 import tqdm
 
+## 10000 searches per move is pretty strong. Vary the quality of
+## decision making by changing number of searches from 10000 to
+## something else. Or, try changing the board size and playing a game.
+
 # Create environment
 env = TicTacToe(3)
 # Reset

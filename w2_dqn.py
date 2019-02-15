@@ -3,6 +3,13 @@ import numpy as np
 import utils
 from algorithms import DQN
 
+## MountainCar-v0 has a per-step reward of -1. And the episodes can
+## go for as long as 200 steps. This reward isn't actually well
+## designed. An alternative strategy could be to give a 0 reward
+## per step and give a +1 reward on success. In the following code,
+## as you keep training, you should see the number of successful
+## episodes per 100 episodes increase.
+
 def episode(i, env, dqn, train): # i is the episode number
 	# Reset
 	obs = env.reset()
@@ -41,6 +48,6 @@ dqn = DQN(env, buffer_size=15000)
 # Explore and fill up some buffer
 for ep_num in range(20): episode(ep_num+1, env, dqn, train=False)
 # Do 200 episodes
-for ep_num in range(1000): episode(ep_num+1, env, dqn, train=True)
+for ep_num in range(700): episode(ep_num+1, env, dqn, train=True)
 # Close the environment
 utils.close(env)
