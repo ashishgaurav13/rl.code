@@ -10,7 +10,7 @@ class TicTacToe:
 		# return initial state
 		return self.board
 
-	def step(self, action):
+	def step(self, action, player='x'):
 		# ensure action is valid (i, j)
 		assert(len(action) == 2)
 		assert(type(action[0]) == int and type(action[1]) == int)
@@ -19,14 +19,15 @@ class TicTacToe:
 		i, j = action
 		assert(self.board[i][j] == None)
 		# do the step
-		self.board[i][j] = 'x'
+		self.board[i][j] = player
 		# ask ai to play next move
-		self.ai()
+		# self.ai()
 		# if game over, return +1 if win, -1 if lose
 		# if game not over, return 0
-		if self.won('x'):
+		other_player = 'x' if player == 'o' else 'o'
+		if self.won(player):
 			return self.board, 1, True, {}
-		elif self.won('o'):
+		elif self.won(other_player):
 			return self.board, -1, True, {}
 		else:
 			return self.board, 0, False, {}
@@ -49,6 +50,15 @@ class TicTacToe:
 			if self.board[i][-i-1] != player:
 				right_diag = False
 		return left_diag or right_diag
+
+	def draw(self):
+		# Count None's
+		none_count = 0
+		for i in range(self.n):
+			for j in range(self.n):
+				if self.board[i][j] is None:
+					none_count += 1
+		return none_count == 0
 
 	def print_board(self):
 		for i in range(self.n):
